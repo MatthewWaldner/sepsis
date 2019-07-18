@@ -1,12 +1,14 @@
 # SepSIS
 
+## About SepSIS
+
+[//]: <> (SepSIS (Separator of Strain-Inherent Sequences) extracts)
+
 ## Requirements
 
 ## Installation
 
 ## Quick Start
-
-## About SepSIS
 
 ## Data Preprocessing
 
