@@ -1,20 +1,19 @@
 # SepSIS
 
-Requirements
+## Requirements
 
-Installation
+## Installation
 
-Quick Start
+## Quick Start
 
-About SepSIS
+## About SepSIS
 
-Data Preprocessing
+## Data Preprocessing
 
-Preparing the .fastg File
+## Preparing the .fastg File
 
-Preparing the .BAM File
+## Preparing the .BAM File
 
-Running SepSIS
+## Running SepSIS
 
-Output
-
+## Output
