@@ -2,8 +2,6 @@
 
 ## About SepSIS
 
-[//]: <> (SepSIS (Separator of Strain-Inherent Sequences) extracts)
-
 ## Requirements
 
 ## Installation
