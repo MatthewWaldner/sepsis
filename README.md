@@ -24,7 +24,12 @@ Either create a clone in the github broswer or enter "git clone https://github.c
 
 Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
-Using SepSIS to extract strain unique subsequecnes from a sequenced short read dataset originating from non-clonal samples:
+Using SepSIS to extract strain unique subsequences from a sequenced short read dataset originating from non-clonal samples:
+1. Recomended: Trim the reads using a read trimming software.
+2. Assemble the bacterial short reads using SPAdes:
+  Ex:
+3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
+  Ex:
 
 ## Data Preprocessing
 
