@@ -10,14 +10,16 @@ The SepSIS pipeline takes as input one pair of .fastq short read files, and will
 
 SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. 
 
-The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subsequence as strain-specific. In theory, a read set containing only 1 strain with ideal read coverage has the same level of coverage across the entire genome. Therefore, an ideal read set containing 2 or more strains will have lower levels of coverage across strain-specifc subsequences when compared to the rest of the genome. 
+The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subsequence as strain-specific. In theory, a read set containing only 1 strain with ideal read coverage has the same level of coverage across the entire genome. Therefore, an ideal read set containing 2 or more strains will have lower levels of coverage across strain-specifc subsequences when compared to the rest of the genome. For example: if reads of 2 strains are equally mixed, the subsequences common to both strains will have a coverage of 100% and the subsequences specifc to a strain will have a coverage of 50%. 
+
+However, coverage of short read sequenced strains will generally not be ideal. 
 
 
 
-Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. 
+Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of 
 
 
-The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID 
+The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID.
 
 The cutoff for the strain-specifc 
 
@@ -51,7 +53,7 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 ## Quick Start
 
-#### Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
+#### When creating manually mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
 ##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
@@ -78,7 +80,7 @@ Ex:
 Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2
 
 
-##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
+##### When using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
 ##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
@@ -97,9 +99,14 @@ Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastg
 
 ## Preparing the .fastg File
 
+
+
 ## Preparing the .BAM File
 
-If a reference assebmler other than minimap2 is used to generate the .BAM file, the user will have to manually use samttols to sort an index the produced .BAM file.
+
+
+
+If a reference assebmler other than minimap2 is used to generate the .BAM file, the user will have to manually use samtools to sort an index the produced .BAM file. 
 
 ## Running SepSIS
 
@@ -145,6 +152,8 @@ The output files will be named:
 /Users/user/Desktop/SYNTH_CYCLIC_FrontEnds_Strain1and2.fasta
 /Users/user/Desktop/SYNTH_CYCLIC_BackEnds_Strain1and2.fasta
 
+As discussed in the second paragraph of About SepSIS, each of the three files indicates which ends have non-strain-specific subsequences using the XXXXEnds.
+
 The output files contain fasta sequences with header based upon SPAdes the .fastg headers.
 
 The .fastg headers consist of the outgoing edge name from a node, the length of the fastg/fasta sequence contained within that .fastg node, and the coverage of that node. In SepSIS output, these nodes are concatenated using the symbols _._ with an example of 3 sequences concatenated together below. The total sequence length is the sum of the lengths in the headers. The node on the end or ends designated in the file name will not be a strain-specific subsequence. If the below sequence was in a FrontEnds file, the node EDGE_290302_length_4247_cov_59.894571 would be a non-strain-unique subsequence and would consist of the first 4247 characters of the nucleotide sequence.
@@ -154,6 +163,3 @@ The .fastg headers consist of the outgoing edge name from a node, the length of 
 Additionally, if the RUNMODE is SYNTH, the .fasta header will also have the strain of the strain-specific sequence in the header, separated from the node names with ___
 
 \>Strain1___EDGE_290302_length_4247_cov_59.894571_._EDGE_21842_length_122_cov_72.000000_._EDGE_50404_length_140_cov_176.578947_._EDGE_61376_length_174_cov_105.981132
-
-
-
