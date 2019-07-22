@@ -51,44 +51,44 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 ## Quick Start
 
-##### Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
+#### Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
-1. Recomended: Trim the reads using a read trimming software for quality control.
+##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
-2. Run AddSampleNameToReads.py on each .fastq read file to add a sample name to the reads.
+##### 2. Run AddSampleNameToReads.py on each .fastq read file to add a sample name to the reads.
 
 Ex: "AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1 path_to_read_folder/Strain1_withName_R1.fastq" Repeat with all other read files. Do not use underscores or spaces in the sample name.
 
-3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
+##### 3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
   
 Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.fastq"
   
-4. Assemble the bacterial short reads using SPAdes:
+##### 4. Assemble the bacterial short reads using SPAdes:
 
 Ex: "spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Strain1and2"
 
-5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
+##### 5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
 
-6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
+##### 6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
 
 Ex:
 
-7. Run SepSIS on the assembly_graph.fastg file using RUNMODE SYNTH
+##### 7. Run SepSIS on the assembly_graph.fastg file using RUNMODE SYNTH
 
 Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2
 
 
 ##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
-1. Recomended: Trim the reads using a read trimming software for quality control.
+##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
-2. Assemble the bacterial short reads using SPAdes:
+##### 2. Assemble the bacterial short reads using SPAdes:
   
- Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Sample1_R1.fastq --pe1-2 path_to_read_folder/Sample1_R2.fastq -o path_to_output_folder/Sample1
+Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Sample1_R1.fastq --pe1-2 path_to_read_folder/Sample1_R2.fastq -o path_to_output_folder/Sample1
 
-3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
+##### 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
   
- Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1
+Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1
 
 ## Data Preprocessing
 
@@ -127,13 +127,19 @@ Optional Arguments: SUBMODE
 
 SepSIS will output 3 .fasta files per run. The file names are prodiced in the format:
 
-outDirectory + "/" + RUNMODE + "_" + SUBMODE + "_" + ENDS_TYPE + "_" + outSuffix + '.fasta'
+outDirectory + '/' + RUNMODE + '_' + SUBMODE + '_' + ENDS_TYPE + '_' + outSuffix + '.fasta'
 
 for example if:
 outDirectory = /Users/user/Desktop
-RUNMODE
-SUBMODE
-ENDS_TYPE
-outSuffix
+RUNMODE = SYNTH
+SUBMODE = CYCLIC
+outSuffix = Strain1and2
+
+The output files will be named:
+
 /Users/user/Desktop/SYNTH_CYCLIC_BothEnds_Strain1and2.fasta
+/Users/user/Desktop/SYNTH_CYCLIC_FrontEnds_Strain1and2.fasta
+/Users/user/Desktop/SYNTH_CYCLIC_BackEnds_Strain1and2.fasta
+
+The output files contain fasta sequences with header based upon SPAdes the .fastg headers.
 
