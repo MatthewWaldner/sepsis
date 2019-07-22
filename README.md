@@ -13,11 +13,7 @@ SepSIS has 3 runmodes that designate the type of analysis performed to designate
 
 The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subsequence as strain-specific. In theory, a read set containing only 1 strain with ideal read coverage has the same level of coverage across the entire genome. Therefore, an ideal read set containing 2 or more strains will have lower levels of coverage across strain-specifc subsequences when compared to the rest of the genome. For example: if reads of 2 strains are equally mixed, the subsequences common to both strains will have a coverage of 100% and the subsequences specifc to a strain will have a coverage of 50%. 
 
-However, coverage of short read sequenced strains will generally not be ideal. 
-
-
-
-Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of 
+Though coverage of short read sequenced strains will generally not be ideal, the above theory has been applied through the use of Z-Scores and percentiles in the ORGANIC_Z and ORGANIC_P runmodes respectively. ORGANIC_Z takes the coverage of all subsequences in a SPAdes assembly_graph.py, and calculates the Z-Score of a single subsequence using the coverage mean and standard deviation. Similarly, ORGANIC_P calculates a subsequence's coverage percentile from the coverage median. The subsequence Z-Score or percentile is then evaulated against a cutoff value. If the coverage is under the thresdhold, the subsequence is evaluated as strain-specific. Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of valid thresholds are 20 to 30 for percentiles and -0.5244 to -0.8416 for Z-Scores. More detailed analysis of ideal thresholds will be uploaded soon.
 
 
 The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID.
