@@ -18,6 +18,8 @@ The cutoff for the strain-specifc
 
 Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. 
 
+Faults of Synth - relies upon coverage, if only one strain mapping to a common subsequence. .BAM file consequence. no spades read mapping.
+
 ## Analysis of Subgraph Types
 
 Additionally, the user must specify the subgraph area to analyze within the assembly_graph.fastg file. These submodes are designated CYCLIC, ISOLATED, and BOTH. The recommended submode is CYCLIC. This mode analyzes only the strongly connected subgraphs of size 2 or more within the assembly graph. These subgraphs contain subsequences that have much higher average coverage than the rest of the assembly graph, and are more likely to contain correctly assembled subsequences. 
