@@ -6,6 +6,7 @@ SepSIS (Separator of Strain Unique Subsequences) is an add-on tool for SPAdes us
 
 The SepSIS pipeline takes as input one pair of .fastq short read files, and will output 3 .fasta files containing strain-specific subsequences. SepSIS attaches subsequences that are not strain-specific to one or both ends of strain-specific subsequence, to allow for the location of the strain-specific subsequences within a genome. Each of the 3 .fasta files contains subsequences that have non-strain specific subsequences on the front end of the sequence, the back end of the sequence, or both ends of the sequence, as designeated by the file name.
 
+
 ## Criteria for Strain-Specifc Subsequence
 
 SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. 
@@ -26,6 +27,7 @@ The cutoff for the strain-specifc
 
 Faults of Synth - relies upon coverage, if only one strain mapping to a common subsequence. .BAM file consequence. no spades read mapping.
 
+
 ## Analysis of Subgraph Types
 
 Additionally, the user must specify the subgraph area to analyze within the assembly_graph.fastg file. These submodes are designated CYCLIC, ISOLATED, and BOTH. The recommended submode is CYCLIC. This mode analyzes only the strongly connected subgraphs of size 2 or more within the assembly graph. These subgraphs contain subsequences that have much higher average coverage than the rest of the assembly graph, and are more likely to contain correctly assembled subsequences. 
@@ -34,6 +36,7 @@ Additionally, the user must specify the subgraph area to analyze within the asse
 The ISOLATED submode runs the analysis on the subgraphs containing strongly connected components of size 1, meaning that none of the subgraphs in this are cyclic. However, there subgraphs will be larger than size 1 to be analyzed. The submode BOTH analyzes the entire graph.
 
 extracted subsequences are output in the form 
+
 
 ## Requirements and Acknowledgements
 
@@ -47,11 +50,13 @@ extracted subsequences are output in the form
 
 SepSIS is loosely based on the SPAdes [Recycler](https://github.com/Shamir-Lab/Recycler) utility. Two of the scripts present in SepSIS contain functions from Recycler. "make_fasta_from_fastg.py" and "recycler_utils.py" contain basic utility functions from Recycler for working with .fastg files. "recycler_utils.py" also contains a function cited by the authors of Recycler as [lh3's fast fastX reader](https://github.com/lh3/readfq/blob/master/readfq.py).
 
+
 ## Installation
 
 Either download from the github broswer or enter "git clone https://github.com/MatthewWaldner/sepsis" in your terminal. All scripts are usable upon download.
 
-## Quick Start
+
+## SepSIS Run Guide
 
 #### When creating manually mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
@@ -59,7 +64,7 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 ##### 2. Run AddSampleNameToReads.py on each .fastq read file to add a sample name to the reads.
 
-Ex: "AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1 path_to_read_folder/Strain1_withName_R1.fastq" Repeat with all other read files. Do not use underscores or spaces in the sample name.
+Ex: "python AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1 path_to_read_folder/Strain1_withName_R1.fastq" Repeat with all other read files. Do not use underscores or spaces in the sample name.
 
 ##### 3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
   
@@ -67,17 +72,17 @@ Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.
   
 ##### 4. Assemble the bacterial short reads using SPAdes:
 
-Ex: "spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Strain1and2"
+Ex: "python spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Strain1and2"
 
 ##### 5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
 
 ##### 6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
 
-Ex:
+Ex: "python CreateBAMFilesForContigs.py Strain1and2 path_to_output_folder/Strain1and2/assembly_graph.fastg path_to_read_folder/Strain1and2_R1.fastq path_to_read_folder/Strain1and2_R2.fastq path_to_output_folder/Strain1and2"
 
 ##### 7. Run SepSIS on the assembly_graph.fastg file using RUNMODE SYNTH
 
-Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2
+Ex: "python path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2 --bamFileIn path_to_output_folder/Strain1and2/Strain1and2.reads_minimap2_pe.sort.bam"
 
 
 ##### When using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
@@ -86,32 +91,14 @@ Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn
 
 ##### 2. Assemble the bacterial short reads using SPAdes:
   
-Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Sample1_R1.fastq --pe1-2 path_to_read_folder/Sample1_R2.fastq -o path_to_output_folder/Sample1
+Ex: "python spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Sample1_R1.fastq --pe1-2 path_to_read_folder/Sample1_R2.fastq -o path_to_output_folder/Sample1"
 
 ##### 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
   
-Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1
-
-## Data Preprocessing
+Ex: "python path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1"
 
 
-
-
-## Preparing the .fastg File
-
-
-
-## Preparing the .BAM File
-
-
-
-
-If a reference assebmler other than minimap2 is used to generate the .BAM file, the user will have to manually use samtools to sort an index the produced .BAM file. 
-
-## Running SepSIS
-
-
-Required Arguments:
+## SepSIS Arguments
 
 --RUNMODE, -RM : Sets the manner in which a subsequence is evaluated as strain-unique. Options: 'ORGANIC_Z', 'ORGANIC_P', or 'SYNTH'. 'SYNTH' is recommended, but is only availible to read sets mixed by the user.
 
