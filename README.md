@@ -16,7 +16,7 @@ The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subseq
 Though coverage of short read sequenced strains will generally not be ideal, the above theory has been applied through the use of Z-Scores and percentiles in the ORGANIC_Z and ORGANIC_P runmodes respectively. ORGANIC_Z takes the coverage of all subsequences in a SPAdes assembly_graph.py, and calculates the Z-Score of a single subsequence using the coverage mean and standard deviation. Similarly, ORGANIC_P calculates a subsequence's coverage percentile from the coverage median. The subsequence Z-Score or percentile is then evaulated against a cutoff value. If the coverage is under the thresdhold, the subsequence is evaluated as strain-specific. Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of valid thresholds are 20 to 30 for percentiles and -0.5244 to -0.8416 for Z-Scores. More detailed analysis of ideal thresholds will be uploaded soon.
 
 
-The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID.
+The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID. 
 
 The cutoff for the strain-specifc 
 
@@ -60,9 +60,13 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 ##### 2. Run AddSampleNameToReads.py on each .fastq read file to add a sample name to the reads.
 
+This step adds a strain ID to each read within a .fastq file for use within SepSIS.
+
 Ex: "python AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1 path_to_read_folder/Strain1_withName_R1.fastq" Repeat with all other read files. Do not use underscores or spaces in the sample name.
 
 ##### 3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
+
+The read sets are combined in order to simulate non-clonal strain mixing. Note that if more strains than are added to the mix, the assembly starts to degrade due to the limitations of SPAdes. SepSIS works best with 2 strains, is functional with 3, and becomes more unreliable as more strains are combined.
   
 Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.fastq"
   
@@ -71,6 +75,8 @@ Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.
 Ex: "python spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Strain1and2"
 
 ##### 5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
+
+The script CreateBAMFilesForContigs.py 
 
 ##### 6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
 
