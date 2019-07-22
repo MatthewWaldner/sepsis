@@ -20,13 +20,9 @@ The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in
 
 ## Analysis of Subgraph Types
 
-Additionally, the user must specify the subgraph area to analyze within the assembly_graph.fastg file. These submodes are designated CYCLIC, ISOLATED, and BOTH. The recommended submode is CYCLIC. This mode analyzes only the strongly connected subgraphs of size 2 or more within the assembly graph. These subgraphs contain subsequences that have much higher average coverage than the rest of the assembly graph, and are more likely to contain correctly assembled subsequences. 
-
+Additionally, the user must specify the subgraph area to analyze within the assembly_graph.fastg file. These submodes are designated CYCLIC, ISOLATED, and BOTH. The recommended submode is CYCLIC. This mode analyzes only the strongly connected subgraphs of size 2 or more within the assembly graph. These subgraphs contain subsequences that have much higher average coverage than the rest of the assembly graph, and are more likely to contain correctly assembled subsequences.
 
 The ISOLATED submode runs the analysis on the subgraphs containing strongly connected components of size 1, meaning that none of the subgraphs in this are cyclic. However, there subgraphs will be larger than size 1 to be analyzed. The submode BOTH analyzes the entire graph.
-
-extracted subsequences are output in the form 
-
 
 ## Requirements and Acknowledgements
 
