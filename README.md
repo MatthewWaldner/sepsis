@@ -66,7 +66,7 @@ Ex: "python AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1
 
 ##### 3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
 
-The read sets are combined in order to simulate non-clonal strain mixing. Note that if more strains than are added to the mix, the assembly starts to degrade due to the limitations of SPAdes. SepSIS works best with 2 strains, is functional with 3, and becomes more unreliable as more strains are combined.
+The read sets are combined to simulate non-clonal strain mixing. Note that if more strains than are added to the mix, the assembly starts to degrade due to the limitations of SPAdes. SepSIS works best with 2 strains, is functional with 3, and becomes more unreliable as more strains are combined.
   
 Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.fastq"
   
