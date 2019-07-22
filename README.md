@@ -116,7 +116,7 @@ Required Arguments:
 
 --outDirectory, -O : The path to the output directory for the output .fasta sequence files.
 
-Optional Arguments:
+Optional Arguments: SUBMODE
 
 --bamFileIn, -B : The path to the .BAM file used in the SYNTH RUNMODE.
 
@@ -125,5 +125,15 @@ Optional Arguments:
 
 ## Output
 
-SepSIS will output 3 .fasta files per run.
+SepSIS will output 3 .fasta files per run. The file names are prodiced in the format:
+
+outDirectory + "/" + RUNMODE + "_" + SUBMODE + "_" + ENDS_TYPE + "_" + outSuffix + '.fasta'
+
+for example if:
+outDirectory = /Users/user/Desktop
+RUNMODE
+SUBMODE
+ENDS_TYPE
+outSuffix
+/Users/user/Desktop/SYNTH_CYCLIC_BothEnds_Strain1and2.fasta
 
