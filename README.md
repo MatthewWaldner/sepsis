@@ -48,10 +48,23 @@ Either download from the github broswer or enter "git clone https://github.com/M
 ##### Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
 1. Recomended: Trim the reads using a read trimming software for quality control.
-2. Run 
+
+2. Run AddSampleNameToReads.py on each .fastq read file to add a sample name to the reads.
+
+Ex: "AddSampleNameToReads.py path_to_read_folder/Strain1_R1.fastq Strain1 path_to_read_folder/Strain1_withName_R1.fastq" Repeat with all other read files. Do not use underscores or spaces in the sample name.
+
 3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
-  Ex: cat Strain1_R1.fastq Strain2_R1.fastq > Strain1and2_R1.fastq
-4. 
+  
+Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.fastq"
+  
+4. Assemble the bacterial short reads using SPAdes:
+
+Ex: "spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Sample1"
+
+5. Set the paths to minimap2 and samtools within 
+
+6.
+
 
 ##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
@@ -59,11 +72,11 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 2. Assemble the bacterial short reads using SPAdes:
   
-  Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 PATH_TO_READ_FOLDER/Sample1_R1.fastq --pe1-2 PATH_TO_READ_FOLDER/Sample1_R2.fastq -o PATH_TO_OUTPUT_FOLDER/Sample1
+ Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Sample1_R1.fastq --pe1-2 path_to_read_folder/Sample1_R2.fastq -o path_to_output_folder/Sample1
 
 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
   
-  Ex: PATH_TO_SepSIS_FOLDER/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn PATH_TO_OUTPUT_FOLDER/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory PATH_TO_OUTPUT_FOLDER/Sample1
+ Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1
 
 ## Data Preprocessing
 
