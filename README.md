@@ -33,6 +33,8 @@ Using SepSIS to extract strain unique subsequences from a sequenced short read d
 
 ## Data Preprocessing
 
+
+
 ## Preparing the .fastg File
 
 ## Preparing the .BAM File
@@ -41,4 +43,25 @@ If a reference assebmler other than minimap2 is used to generate the .BAM file, 
 
 ## Running SepSIS
 
+
+Required Arguments:
+--RUNMODE, -RM : Sets the manner in which a subsequence is evaluated as strain-unique. Options: 'ORGANIC_Z', 'ORGANIC_P', or 'SYNTH'
+
+--SUBMODE, -SM : Sets the graph subset to be evaluated. CYCLIC is recommended in most cases. Options: 'CYCLIC', 'ISOLATED', 'BOTH'
+
+--fastgFileIn, -F : The path to the SPAdes output .fastg file.
+
+--ScoreValue, -S : The thresholding value used to evaluate if a subsequence is strain-specific.
+
+--outDirectory, -O : The path to the output directory for the output .fasta sequence files.
+
+Optional Arguments:
+--bamFileIn, -B : The path to the .BAM file used in the SYNTH RUNMODE.
+
+--outSuffix, -S : An optional string to add to the output files.
+
+
 ## Output
+
+SepSIS outputs 3 .fasta files.
+
