@@ -56,9 +56,11 @@ Either download from the github broswer or enter "git clone https://github.com/M
 ##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
 1. Recomended: Trim the reads using a read trimming software for quality control.
+
 2. Assemble the bacterial short reads using SPAdes:
   
   Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 PATH_TO_READ_FOLDER/Sample1_R1.fastq --pe1-2 PATH_TO_READ_FOLDER/Sample1_R2.fastq -o PATH_TO_OUTPUT_FOLDER/Sample1
+
 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
   
   Ex: PATH_TO_SepSIS_FOLDER/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn PATH_TO_OUTPUT_FOLDER/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory PATH_TO_OUTPUT_FOLDER/Sample1
