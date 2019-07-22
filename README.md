@@ -82,7 +82,7 @@ Ex: "python CreateBAMFilesForContigs.py Strain1and2 path_to_output_folder/Strain
 
 ##### 7. Run SepSIS on the assembly_graph.fastg file using RUNMODE SYNTH
 
-Ex: "python path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2 --bamFileIn path_to_output_folder/Strain1and2/Strain1and2.reads_minimap2_pe.sort.bam"
+Ex: "python SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2 --bamFileIn path_to_output_folder/Strain1and2/Strain1and2.reads_minimap2_pe.sort.bam"
 
 
 ### When using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
@@ -95,7 +95,7 @@ Ex: "python spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folde
 
 ##### 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
   
-Ex: "python path_to_SepSIS_folder/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1"
+Ex: "python SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn path_to_output_folder/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Sample1"
 
 
 ## SepSIS Arguments
