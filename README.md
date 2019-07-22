@@ -127,7 +127,7 @@ Optional Arguments: SUBMODE
 
 SepSIS will output 3 .fasta files per run. The file names are prodiced in the format:
 
-outDirectory + '/' + RUNMODE + '_' + SUBMODE + '_' + ENDS_TYPE + '_' + outSuffix + '.fasta'
+outDirectory + / + RUNMODE + _ + SUBMODE + _ + ENDS_TYPE + _ + outSuffix + .fasta
 
 for example if:
 outDirectory = /Users/user/Desktop
