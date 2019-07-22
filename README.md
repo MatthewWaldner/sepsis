@@ -16,7 +16,7 @@ The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in
 
 The cutoff for the strain-specifc 
 
-Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets.
+Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. 
 
 ## Analysis of Subgraph Types
 
@@ -59,11 +59,17 @@ Ex: "cat Strain1_withName_R1.fastq" Strain2_withName_R1.fastq" > Strain1and2_R1.
   
 4. Assemble the bacterial short reads using SPAdes:
 
-Ex: "spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Sample1"
+Ex: "spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folder/Strain1and2_R1.fastq --pe1-2 path_to_read_folder/Strain1and2_R2.fastq -o path_to_output_folder/Strain1and2"
 
-5. Set the paths to minimap2 and samtools within 
+5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
 
-6.
+6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
+
+Ex:
+
+7. Run SepSIS on the assembly_graph.fastg file using RUNMODE SYNTH
+
+Ex: path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2
 
 
 ##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
