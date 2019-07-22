@@ -45,6 +45,7 @@ If a reference assebmler other than minimap2 is used to generate the .BAM file, 
 
 
 Required Arguments:
+
 --RUNMODE, -RM : Sets the manner in which a subsequence is evaluated as strain-unique. Options: 'ORGANIC_Z', 'ORGANIC_P', or 'SYNTH'
 
 --SUBMODE, -SM : Sets the graph subset to be evaluated. CYCLIC is recommended in most cases. Options: 'CYCLIC', 'ISOLATED', 'BOTH'
@@ -56,6 +57,7 @@ Required Arguments:
 --outDirectory, -O : The path to the output directory for the output .fasta sequence files.
 
 Optional Arguments:
+
 --bamFileIn, -B : The path to the .BAM file used in the SYNTH RUNMODE.
 
 --outSuffix, -S : An optional string to add to the output files.
