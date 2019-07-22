@@ -58,7 +58,7 @@ Either download from the github broswer or enter "git clone https://github.com/M
 
 ## SepSIS Run Guide
 
-#### When creating manually mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
+### When creating manually mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
 ##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
@@ -85,7 +85,7 @@ Ex: "python CreateBAMFilesForContigs.py Strain1and2 path_to_output_folder/Strain
 Ex: "python path_to_SepSIS_folder/SepSIS.py --RUNMODE SYNTH --SUBMODE BOTH --fastgFileIn path_to_output_folder/Strain1and2/assembly_graph.fastg --ScoreValue 20 --outDirectory path_to_output_folder/Strain1and2 --bamFileIn path_to_output_folder/Strain1and2/Strain1and2.reads_minimap2_pe.sort.bam"
 
 
-##### When using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
+### When using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
 ##### 1. Recomended: Trim the reads using a read trimming software for quality control.
 
