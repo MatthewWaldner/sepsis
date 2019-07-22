@@ -13,16 +13,10 @@ SepSIS has 3 runmodes that designate the type of analysis performed to designate
 
 The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subsequence as strain-specific. In theory, a read set containing only 1 strain with ideal read coverage has the same level of coverage across the entire genome. Therefore, an ideal read set containing 2 or more strains will have lower levels of coverage across strain-specifc subsequences when compared to the rest of the genome. For example: if reads of 2 strains are equally mixed, the subsequences common to both strains will have a coverage of 100% and the subsequences specifc to a strain will have a coverage of 50%. 
 
-Though coverage of short read sequenced strains will generally not be ideal, the above theory has been applied through the use of Z-Scores and percentiles in the ORGANIC_Z and ORGANIC_P runmodes respectively. ORGANIC_Z takes the coverage of all subsequences in a SPAdes assembly_graph.py, and calculates the Z-Score of a single subsequence using the coverage mean and standard deviation. Similarly, ORGANIC_P calculates a subsequence's coverage percentile from the coverage median. The subsequence Z-Score or percentile is then evaulated against a cutoff value. If the coverage is under the thresdhold, the subsequence is evaluated as strain-specific. Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of valid thresholds are 20 to 30 for percentiles and -0.5244 to -0.8416 for Z-Scores. More detailed analysis of ideal thresholds will be uploaded soon.
+Though coverage of short read sequenced strains will generally not be ideal, the above theory has been applied through the use of Z-Scores and percentiles in the ORGANIC_Z and ORGANIC_P runmodes respectively. ORGANIC_Z takes the coverage of all subsequences in a SPAdes assembly_graph.py, and calculates the Z-Score of a single subsequence using the coverage mean and standard deviation. Similarly, ORGANIC_P calculates a subsequence's coverage percentile from the coverage median. The subsequence Z-Score or percentile is then evaulated against a relevant cutoff value. If the coverage is under the thresdhold, the subsequence is evaluated as strain-specific. Ideally, for runmodes ORGANIC_P, and ORGANIC_Z these cutoffs need to be set by the user based on the coverage distribution of the read sets. However, a rough estimation of valid thresholds are 20 to 30 (out of 0-100) for percentiles and -0.5244 to -0.8416 for Z-Scores. More detailed analysis of ideal thresholds will be uploaded soon.
 
 
-The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID. 
-
-The cutoff for the strain-specifc 
-
-
-Faults of Synth - relies upon coverage, if only one strain mapping to a common subsequence. .BAM file consequence. no spades read mapping.
-
+The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID. The reads are combined by the user into single R1 and R2 files, and assembled with SPAdes. Because SPAdes does not retain information about which reads make-up a particular subsequence, the reads are then mapped against the SPAdes assembly_graph.fastg file. SepSIS can then evaluate subsequences based on the ratio of a particular strain's reads mapping to a subsequence. The recommend cutoff for SYNTH strain-specificity is 1 (out of 0 to 1, representing 0% to 100% of reads from single strain mapping to the read.). This ensures only 1 strain has reads mapping to a subsequence, making it entirely strain-unique.
 
 ## Analysis of Subgraph Types
 
@@ -76,7 +70,7 @@ Ex: "python spades.py -k 21,33,55,77,99,121 --careful --pe1-1 path_to_read_folde
 
 ##### 5. Set the paths to minimap2 and samtools within CreateBAMFilesForContigs.py.
 
-The script CreateBAMFilesForContigs.py 
+The script CreateBAMFilesForContigs.py is a quick script to run minimap2 and samtools, creating the necessary input for SepSIS.
 
 ##### 6. Run CreateBAMFilesForContigs.py using the assembly graph from SPAdes and the two read files.
 
