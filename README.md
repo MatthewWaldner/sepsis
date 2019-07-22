@@ -7,7 +7,7 @@ SepSIS (Separator of Strain Unique Subsequences) is an add-on tool for SPAdes us
 The SepSIS pipeline takes as input one pair of .fastq short read files, and will output 3 .fasta files containing strain-specific subsequences. SepSIS attaches subsequences that are not strain-specific to one or both ends of strain-specific subsequence, to allow for the location of the strain-specific subsequences within a genome. Each of the 3 .fasta files contains subsequences that have non-strain specific subsequences on the front end of the sequence, the back end of the sequence, or both ends of the sequence, as designeated by the file name.
 
 
-## Criteria for Strain-Specifc Subsequence
+## Criteria for Strain-Specifc Subsequences
 
 SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. 
 
