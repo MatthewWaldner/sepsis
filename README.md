@@ -6,13 +6,13 @@ SepSIS (Separator of Strain Unique Subsequences) is an add-on tool for SPAdes us
 
 ## Requirements and Acknowledgements
 
-Python 3.0 or greater.
+[Python 3.0](https://www.python.org/downloads/) or greater.
 
-SPAdes 3.11 or greater.
+[SPAdes 3.11](https://github.com/ablab/spades) or greater.
 
-samtools
+[samtools](http://www.htslib.org/)
 
-minimap2 , or another reference assembly software.
+[minimap2](https://github.com/lh3/minimap2), or another reference assembly program.
 
 SepSIS is loosely based on the SPAdes [Recycler](https://github.com/Shamir-Lab/Recycler) utility. Two of the scripts present in SepSIS contain functions from Recycler. "make_fasta_from_fastg.py" and "recycler_utils.py" contain basic utility functions from Recycler for working with .fastg files. "recycler_utils.py" also contains a function cited by the authors of Recycler as [lh3's fast fastX reader](https://github.com/lh3/readfq/blob/master/readfq.py).
 
@@ -36,6 +36,8 @@ Using SepSIS to extract strain unique subsequences from a sequenced short read d
 ## Preparing the .fastg File
 
 ## Preparing the .BAM File
+
+If a reference assebmler other than minimap2 is used to generate the .BAM file, the user will have to manually use samttols to sort an index the produced .BAM file.
 
 ## Running SepSIS
 
