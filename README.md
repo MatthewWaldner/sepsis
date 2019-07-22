@@ -8,7 +8,11 @@ The SepSIS pipeline takes in a single set of paired short reads, and will output
 
 ## Criteria for Strain-Specifc Subsequence
 
-SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. The ORGANIC_P, and ORGANIC_Z runmodes use
+SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. 
+
+The ORGANIC_P, and ORGANIC_Z runmodes use similar criteria to designate a subsequence as strain-specific. In theory, a read set containing only 1 strain with ideal read coverage has the same level of coverage across the entire genome. Therefore, an ideal read set containing 2 or more strains will have lower levels of coverage across strain-specifc sequences than the 
+
+The SYNTH runmode avoids the coverage-based heuristic of the other two modes, in favour of directly assigning strain-specifc reads to subsequences within an assembly graph. This is performed by tagging the raw (or quality controlled) reads with a strain ID 
 
 The cutoff for the strain-specifc 
 
@@ -37,19 +41,25 @@ SepSIS is loosely based on the SPAdes [Recycler](https://github.com/Shamir-Lab/R
 
 ## Installation
 
-Either create a clone in the github broswer or enter "git clone https://github.com/MatthewWaldner/sepsis" in your terminal. All scripts are usable upon download.
+Either download from the github broswer or enter "git clone https://github.com/MatthewWaldner/sepsis" in your terminal. All scripts are usable upon download.
 
 ## Quick Start
 
 ##### Creating mixed short read datasets on your computer to use SepSIS as a strain subsequence difference engine:
 
+1. Recomended: Trim the reads using a read trimming software for quality control.
+2. Run 
+3. Concatenate the separate R1 reads together and the R2 reads together in the terminal.
+  Ex: cat Strain1_R1.fastq Strain2_R1.fastq > Strain1and2_R1.fastq
+4. 
+
 ##### Using SepSIS to extract strain-specifc subsequences from a sequenced short read dataset originating from non-clonal samples:
 
-1. Recomended: Trim the reads using a read trimming software.
+1. Recomended: Trim the reads using a read trimming software for quality control.
 2. Assemble the bacterial short reads using SPAdes:
-  Ex:
+  Ex: spades.py -k 21,33,55,77,99,121 --careful --pe1-1 PATH_TO_READ_FOLDER/Sample1_R1.fastq --pe1-2 PATH_TO_READ_FOLDER/Sample1_R2.fastq -o PATH_TO_OUTPUT_FOLDER/Sample1
 3. Run SepSIS on the assembly_graph.fastg file using RUNMODES ORGANIC_Z or ORGANIC_P.
-  Ex:
+  Ex: PATH_TO_SepSIS_FOLDER/SepSIS.py --RUNMODE ORGANIC_P --SUBMODE CYCLIC --fastgFileIn PATH_TO_OUTPUT_FOLDER/Sample1/assembly_graph.fastg --ScoreValue 20 --outDirectory PATH_TO_OUTPUT_FOLDER/Sample1
 
 ## Data Preprocessing
 
