@@ -149,11 +149,11 @@ The output files contain fasta sequences with header based upon SPAdes the .fast
 
 The .fastg headers consist of the outgoing edge name from a node, the length of the fastg/fasta sequence contained within that .fastg node, and the coverage of that node. In SepSIS output, these nodes are concatenated using the symbols _._ with an example of 3 sequences concatenated together below. The total sequence length is the sum of the lengths in the headers. The node on the end or ends designated in the file name will not be a strain-specific subsequence. If the below sequence was in a FrontEnds file, the node EDGE_290302_length_4247_cov_59.894571 would be a non-strain-unique subsequence and would consist of the first 4247 characters of the nucleotide sequence.
 
->EDGE_290302_length_4247_cov_59.894571_._EDGE_21842_length_122_cov_72.000000_._EDGE_50404_length_140_cov_176.578947_._EDGE_61376_length_174_cov_105.981132
+\>EDGE_290302_length_4247_cov_59.894571_._EDGE_21842_length_122_cov_72.000000_._EDGE_50404_length_140_cov_176.578947_._EDGE_61376_length_174_cov_105.981132
 
 Additionally, if the RUNMODE is SYNTH, the .fasta header will also have the strain of the strain-specific sequence in the header, separated from the node names with ___
 
->Strain1___EDGE_290302_length_4247_cov_59.894571_._EDGE_21842_length_122_cov_72.000000_._EDGE_50404_length_140_cov_176.578947_._EDGE_61376_length_174_cov_105.981132
+\>Strain1___EDGE_290302_length_4247_cov_59.894571_._EDGE_21842_length_122_cov_72.000000_._EDGE_50404_length_140_cov_176.578947_._EDGE_61376_length_174_cov_105.981132
 
 
 
