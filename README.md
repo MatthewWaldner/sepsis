@@ -2,12 +2,12 @@
 
 ## About SepSIS
 
-SepSIS (Separator of Strain Unique Subsequences) is an add-on tool for SPAdes used to extract subsequences unique to bacterial strains from paired, short read, bacterial datasets that have been assembled using SPAdes. SepSIS was designed to function on sequenced bacterial datasets that have originated from non-clonal samples of a single species, as well as clonal strains that are mixed by the user post-sequencing. Additionally, the user may manually mix sets of sequenced reads containing different strains. If these are used as input, SepSIS can function as a strain subsequence difference engine by using the metadata on which reads map to each assembled subsequence. 
+SepSIS (Separator of Strain Unique Sequences) is an add-on tool for SPAdes used to extract subsequences unique to bacterial strains from paired, short read, bacterial datasets that have been assembled using SPAdes. SepSIS was designed to function on sequenced bacterial datasets that have originated from non-clonal samples of a single species, as well as strains that are mixed by the user post-sequencing. Additionally, the user may manually mix sets of sequenced reads containing different strains. If these are used as input, SepSIS can function as a strain subsequence difference engine by using the metadata on which reads map to each assembled subsequence. 
 
 The SepSIS pipeline takes as input one pair of .fastq short read files, and will output 3 .fasta files containing strain-specific subsequences. SepSIS attaches subsequences that are not strain-specific to one or both ends of strain-specific subsequence, to allow for the location of the strain-specific subsequences within a genome. Each of the 3 .fasta files contains subsequences that have non-strain specific subsequences on the front end of the sequence, the back end of the sequence, or both ends of the sequence, as designeated by the file name.
 
 
-## Criteria for Strain-Specifc Subsequences
+## Criteria for Strain-Specifc Sequences
 
 SepSIS has 3 runmodes that designate the type of analysis performed to designated a subsequence as strain unique. These are designated ORGANIC_P, ORGANIC_Z, and SYNTH. 
 
